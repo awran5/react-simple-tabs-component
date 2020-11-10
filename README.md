@@ -62,7 +62,7 @@ export default function App() {
 | Prop          | Type             | Options  | Description                               |     Default      |
 | ------------- | ---------------- | -------- | ----------------------------------------- | :--------------: |
 | `tabs`        | Array of objects | Required | Array of objects for your Tabs            |       `-`        |
-| `selectedTab` | Integer          | Required | A stateful value holing the current Tab   |       `0`        |
+| `selectedTab` | Integer          | Required | A stateful value holding the current Tab  |       `0`        |
 | `onClick`     | Function         | Required | Function to update the current Tab        |       `-`        |
 | `orientation` | String           | Optional | Tab orientation `horizontal` - `vertical` |   `horizontal`   |
 | `className`   | String           | Optional | A className for custom styles             | `tabs-component` |
