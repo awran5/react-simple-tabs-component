@@ -23,10 +23,22 @@ yarn add react-simple-tabs-component
 ## Usage
 
 ```jsx
-import React, { useState } from 'react'
+import React, { useState,Fragment } from 'react'
 import { Tabs } from 'react-simple-tabs-component'
-// (Optional) Provide some basic style
-import 'react-simple-tabs-component/dist/index.css'
+import 'react-simple-tabs-component/dist/index.css' // (Optional) Provide some basic style
+
+// Component Example
+const TabOne = () => {
+  return (
+    <Fragment>
+      <h3>Tab One</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sint illum iusto nostrum cumque qui
+        voluptas tenetur inventore ut quis?
+      </p>
+    </Fragment>
+  )
+}
 
 // Tabs structure Array
 const tabs = [
