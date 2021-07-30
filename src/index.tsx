@@ -1,1 +1,1 @@
-export { default as Tabs } from './Components/Tabs'
+export { Tabs } from './Components/Tabs'

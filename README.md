@@ -23,63 +23,70 @@ yarn add react-simple-tabs-component
 ## Usage
 
 ```jsx
-import React, { useState,Fragment } from 'react'
 import { Tabs } from 'react-simple-tabs-component'
-import 'react-simple-tabs-component/dist/index.css' // (Optional) Provide some basic style
+// (Optional) if you don't want to include bootstrap css stylesheet
+import 'react-simple-tabs-component/dist/index.css'
 
 // Component Example
 const TabOne = () => {
   return (
-    <Fragment>
+    <>
       <h3>Tab One</h3>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sint illum iusto nostrum cumque qui
         voluptas tenetur inventore ut quis?
       </p>
-    </Fragment>
+    </>
   )
 }
 
 // Tabs structure Array
 const tabs = [
   {
-    label: 'Tab One', // Tab title
-    index: 1,         // Tab index
-    Component: TabOne // Tab Component
+    label: 'Tab One', // Tab Title - String
+    Component: TabOne // Tab Body - JSX.Element
   },
   {
     label: 'Tab Two',
-    index: 2,
     Component: TabTwo
   },
   {
     label: 'Tab Three',
-    index: 3,
     Component: TabThree
   }
 ]
 
 export default function App() {
-  const [selectedTab, setSelectedTab] = useState(tabs[0].index)
   return (
     <div className='App'>
 
-      <Tabs tabs={tabs} onClick={setSelectedTab} selectedTab={selectedTab} />
+      <Tabs tabs={tabs} /* Props */ />
     </div>
   )
 ```
 
 ### Available Props
 
-| Prop          | Type             | Options  | Description                               |     Default      |
-| ------------- | ---------------- | -------- | ----------------------------------------- | :--------------: |
-| `tabs`        | Array of objects | Required | Array of objects for your Tabs            |       `-`        |
-| `selectedTab` | Integer          | Required | A stateful value holding the current Tab  |       `0`        |
-| `onClick`     | Function         | Required | Function to update the current Tab        |       `-`        |
-| `orientation` | String           | Optional | Tab orientation `horizontal` - `vertical` |   `horizontal`   |
-| `className`   | String           | Optional | A className for custom styles             | `tabs-component` |
+| Prop          | Type             | Options  | Description                               |          Default           |
+| ------------- | ---------------- | -------- | ----------------------------------------- | :------------------------: |
+| `tabs`        | Array of objects | Required | Array of objects for your Tabs            |            `-`             |
+| `orientation` | String           | Optional | Tab orientation `horizontal` - `vertical` |        `horizontal`        |
+| `type`        | String           | Optional | Tabs type `tabs` - `pills`                |           `tabs`           |
+| `className`   | String           | Optional | A className applied to the main `div`     | `bootstrap-tabs-component` |
 
-### [sandbox](https://codesandbox.io/s/react-typescript-tabs-js8xi)
+---
+
+## Style
+
+The Component is based on Bootstrap 5 `HTML` structure and `CSS` classes so it will work out of the box if Bootstrap 5 css stylesheet is already included in you project. If you don't have/want to include Bootstrap, you still can use a `standalone` css stylesheet which was extracted form bootstrap 5 stylesheet. Just add it:
+
+```jsx
+import 'react-simple-tabs-component/dist/index.css'
+```
+
+<br />
+
+[![Edit react-typescript-tabs (forked)](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-typescript-tabs-forked-0txii?fontsize=14&hidenavigation=1&theme=dark)
 
 ### License
 

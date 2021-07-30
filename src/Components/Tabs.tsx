@@ -1,50 +1,74 @@
-import React, { FC } from 'react'
+import React, { useReducer } from 'react'
 import '../styles.css'
 
-type TabsProps = {
+export declare type TabsProps = {
   tabs: {
     label: string
-    index: number
-    Component: FC<{ index: number }>
+    Component: () => JSX.Element
   }[]
-  selectedTab: number
-  onClick: (index: number) => void
   orientation?: 'horizontal' | 'vertical'
+  type?: 'tabs' | 'pills'
   className?: string
 }
 
-const Tabs: FC<TabsProps> = ({
+declare type State = {
+  selected: number
+}
+
+type Action = { type: 'selected'; payload: number }
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'selected':
+      return {
+        selected: action.payload
+      }
+    default:
+      return state
+  }
+}
+
+export const Tabs = ({
   tabs = [],
-  selectedTab = 0,
-  onClick,
-  className = 'tabs-component',
+  className = 'bootstrap-tabs-component',
+  type = 'tabs',
   orientation = 'horizontal'
-}) => {
-  const Panel = tabs && tabs.find((tab) => tab.index === selectedTab)
+}: TabsProps) => {
+  const [{ selected }, dispatch] = useReducer(reducer, {
+    selected: 0
+  })
+  const Panel = tabs && tabs.find((_, index) => index === selected)
 
   return (
-    <div className={orientation === 'vertical' ? className + ' vertical' : className}>
-      <div role='tablist' aria-orientation={orientation}>
-        {tabs.map((tab) => (
-          <button
-            className={selectedTab === tab.index ? 'active' : ''}
-            onClick={() => onClick(tab.index)}
-            key={tab.index}
-            type='button'
-            role='tab'
-            aria-selected={selectedTab === tab.index}
-            aria-controls={`tabpanel-${tab.index}`}
-            tabIndex={selectedTab === tab.index ? 0 : -1}
-            id={`btn-${tab.index}`}
-          >
-            {tab.label}
-          </button>
+    <div className={orientation === 'vertical' ? `d-flex align-items-start ${className}` : className}>
+      <ul
+        className={`nav nav-${type} ${orientation === 'vertical' ? 'flex-column me-3' : 'mb-3'}`}
+        role='tablist'
+        aria-orientation={orientation}
+      >
+        {tabs.map((tab, index) => (
+          <li className='nav-item' role='presentation' key={tab.label}>
+            <button
+              id={`btn-${index}`}
+              className={selected === index ? 'nav-link active' : 'nav-link'}
+              type='button'
+              role='tab'
+              aria-selected={selected === index}
+              aria-controls={`tabpanel-${index}`}
+              tabIndex={selected === index ? 0 : -1}
+              onClick={() => dispatch({ type: 'selected', payload: index })}
+            >
+              {tab.label}
+            </button>
+          </li>
         ))}
-      </div>
-      <div role='tabpanel' aria-labelledby={`btn-${selectedTab}`} id={`tabpanel-${selectedTab}`}>
-        {Panel && <Panel.Component index={selectedTab} />}
+      </ul>
+
+      <div className='tab-content'>
+        <div role='tabpanel' aria-labelledby={`btn-${selected}`} id={`tabpanel-${selected}`}>
+          {Panel && <Panel.Component />}
+        </div>
       </div>
     </div>
   )
 }
-export default Tabs

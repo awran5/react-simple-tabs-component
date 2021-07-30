@@ -1,11 +1,9 @@
-import React, { FC, Fragment } from 'react'
-
-const TabThree: FC<{}> = () => {
+const TabThree = () => {
   return (
-    <Fragment>
-      <h1>Tab Three</h1>
-      <p>Tab Three Content</p>
-    </Fragment>
+    <p>
+      <strong>Tab Three Content </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sint
+      illum iusto nostrum cumque qui voluptas tenetur inventore ut quis?
+    </p>
   )
 }
 export default TabThree
